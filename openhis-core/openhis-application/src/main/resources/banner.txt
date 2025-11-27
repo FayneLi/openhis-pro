@@ -1,0 +1,21 @@
+
+      ::::::::  :::::::::  :::::::::: ::::    :::    :::    ::: ::::::::::: ::::::::
+    :+:    :+: :+:    :+: :+:        :+:+:   :+:    :+:    :+:     :+:    :+:    :+:
+   +:+    +:+ +:+    +:+ +:+        :+:+:+  +:+    +:+    +:+     +:+    +:+
+  +#+    +:+ +#++:++#+  +#++:++#   +#+ +:+ +#+    +#++:++#++     +#+    +#++:++#++
+ +#+    +#+ +#+        +#+        +#+  +#+#+#    +#+    +#+     +#+           +#+
+#+#    #+# #+#        #+#        #+#   #+#+#    #+#    #+#     #+#    #+#    #+#
+########  ###        ########## ###    ####    ###    ### ########### ########
+
+Application Version: ${core.version}
+
+领域层的重构事项
+//TODO： TraceNoManage相关追溯码的测试和迁移
+//TODO:  ReservationRecord门诊预约相关的迁移，使用workflow域的Appointment表达
+//TODO:  对接LIS/pacs,CrossSystemSendApplyUtil
+//TODO:  OrderProcess变成一个聚合agg_lacation_change，表达位置转换的医嘱，转院单，出院单
+//TODO:  DiagnosisBelongBinding变成一个聚合DiagnosisRange，表达之前的诊断归属
+//TODO:  PaymentRecStatic被PaymentFrom替代
+//TODO:  ThreePartPay为聚合，替换名称ThreePartPayCallback
+//TODO:  使用axon的事件溯源覆盖OperationRecord相关的实体操作记录
+//TODO:  ConceptMap替换了原来的电子发票用到的org_contrast，并且迁移到了support域，考虑将国林码对照也用这个表实现，优先级不高

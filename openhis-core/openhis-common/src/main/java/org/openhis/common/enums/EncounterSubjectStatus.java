@@ -1,0 +1,40 @@
+package org.openhis.common.enums;
+
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.whale.common.enums.EnumInterface;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * 就诊对象状态
+ */
+@Getter
+@AllArgsConstructor
+public enum EncounterSubjectStatus implements EnumInterface {
+    PLANNED(1, "arrived", "已到达"),
+
+    TRIAGED(2, "triaged", "已分诊"),
+
+    RECEIVING_CARE(3, "receiving-care", "已看诊"),
+
+    ON_LEAVE(4, "on-leave", "已离开"),
+
+    DEPARTED(5, "departed", "已完成");
+
+    @EnumValue
+    private final Integer value;
+    private final String code;
+    private final String info;
+
+    public static EncounterSubjectStatus getByValue(Integer value) {
+        if (value == null) {
+            return null;
+        }
+        for (EncounterSubjectStatus val : values()) {
+            if (val.getValue().equals(value)) {
+                return val;
+            }
+        }
+        return null;
+    }
+}

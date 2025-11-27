@@ -1,0 +1,251 @@
+package org.openhis.domain.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.whale.common.core.domain.BaseEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+/**
+ * 药品请求管理Entity实体
+ *
+ * @author system
+ * @date 2025-02-20
+ */
+@Data
+@TableName("med_medication_request")
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = false)
+public class MedicationRequest extends BaseEntity {
+
+    /** ID */
+    @TableId(type = IdType.ASSIGN_ID)
+    private Long id;
+
+    /** 药品请求编码 */
+    private String busNo;
+
+    /** 处方号 */
+    private String prescriptionNo;
+
+    /** 分组id */
+    private Long groupId;
+
+    /** 组套id */
+    private Long packageId;
+
+    /** 请求数量 */
+    private BigDecimal quantity;
+
+    /** 执行次数 */
+    private Integer executeNum;
+
+    /** 请求单位编码 */
+    private String unitCode;
+
+    /** 产品批号 */
+    private String lotNumber;
+
+    /** 药品请求状态 */
+    private Integer statusEnum;
+
+    /** 状态原因 */
+    private Integer statusReason;
+
+    /** 状态变更时间 */
+    private Date statusChangedTime;
+
+    /** 请求意图 */
+    private Integer intentEnum;
+
+    /** 请求类型 */
+    private Integer categoryEnum;
+
+    /** 优先级 */
+    private Integer priorityEnum;
+
+    /** 是否停止执行 */
+    private Integer performFlag;
+
+    /** 药品定义id */
+    private Long medicationId;
+
+    /** 患者 */
+    private Long patientId;
+
+    /** 开方医生 */
+    private Long practitionerId;
+
+    /** 所在位置 */
+    private Long locationId;
+
+    /**
+     * 发放药房
+     */
+    private Long performLocation;
+
+    /** 开方人科室 */
+    private Long orgId;
+
+    /** 就诊id */
+    private Long encounterId;
+
+    /**
+     * 诊断ID
+     */
+    private Long conditionId;
+
+    /**
+     * 就诊诊断id
+     */
+    private Long encounterDiagnosisId;
+
+    /** 支持用药信息 */
+    private String supportInfo;
+
+    /** 请求开始时间 */
+    private Date reqAuthoredTime;
+
+    /** 是否报告 */
+    private Integer reportFlag;
+
+    /** 执行人类型 */
+    private Integer performerEnum;
+
+    /** 执行人 */
+    private Long performerId;
+
+    /** 执行科室 */
+    private Long performOrg;
+
+    /** 设备id */
+    private Long deviceDefId;
+
+    /** 记录人 */
+    private Long recorderId;
+
+    /** 请求原因 */
+    private String reasonJson;
+
+    /** 治疗类型 */
+    private Integer therapyEnum;
+
+    /** 服药时间(开始) */
+    private Date effectiveDoseStart;
+
+    /** 服药时间(结束) */
+    private Date effectiveDoseEnd;
+
+    /** 皮试标志 */
+    private Integer skinTestFlag;
+
+    /** 合同Id */
+    private String contractNo;
+
+    /** 输液标志 */
+    private Integer infusionFlag;
+
+    /** 用法 */
+    private String methodCode;
+
+    /** 用药频次 */
+    private String rateCode;
+
+    /** 单次剂量 */
+    private BigDecimal dose;
+
+    /** 剂量单位 */
+    private String doseUnitCode;
+
+    /** 单次最大剂量 */
+    private BigDecimal maxDose;
+
+    /** 首次用量 */
+    private BigDecimal firstDose;
+
+    /** 首次持续时间 */
+    private String firstDuration;
+
+    /** 给药间隔 */
+    private String dispenseInterval;
+
+    /** 单次发药数 */
+    private Integer dispensePerQuantity;
+
+    /** 每次发药供应天数 */
+    private Integer dispensePerDuration;
+
+    /** 输液速度 */
+    private Integer speed;
+
+    /** 退药id */
+    private Long refundMedicineId;
+
+    /** 处方类别 */
+    private String rxTypeCode;
+
+    /**
+     * 请求内容json
+     */
+    private String contentJson;
+
+    /**
+     * 类别医保编码
+     */
+    private Integer ybClassEnum;
+
+    /** 追溯码 */
+    private String traceNo;
+
+    /**
+     * 中药付数
+     */
+    private BigDecimal chineseHerbsDoseQuantity;
+
+    /**
+     * 代煎标识 | 0:否 , 1:是
+     */
+    private Integer sufferingFlag;
+
+    /**
+     * 中医标识
+     */
+    private Integer tcmFlag;
+
+    /**
+     * 排序号
+     */
+    private Integer sortNumber;
+
+    /** 校对人 */
+    private Long performerCheckId;
+
+    /** 校对时间 */
+    private Date checkTime;
+
+    /**
+     * 签发编码
+     */
+    private String signCode;
+
+    /** 请求基于什么 */
+    private String basedOnTable;
+
+    /** 请求基于什么的ID */
+    private Long basedOnId;
+
+    /**
+     * 用药说明
+     */
+    private String dosageInstruction;
+
+    /**
+     * 生成来源
+     */
+    private Integer generateSourceEnum;
+}

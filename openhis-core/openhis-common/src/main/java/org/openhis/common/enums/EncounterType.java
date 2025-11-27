@@ -1,0 +1,30 @@
+package org.openhis.common.enums;
+
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.whale.common.enums.EnumInterface;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum EncounterType implements EnumInterface {
+
+    INITIAL(1, "initial", "初诊"), FOLLOW_UP(2, "follow-up", "复诊");
+
+    @EnumValue
+    private final Integer value;
+    private final String code;
+    private final String info;
+
+    public static EncounterType getByValue(Integer value) {
+        if (value == null) {
+            return null;
+        }
+        for (EncounterType val : values()) {
+            if (val.getValue().equals(value)) {
+                return val;
+            }
+        }
+        return null;
+    }
+}

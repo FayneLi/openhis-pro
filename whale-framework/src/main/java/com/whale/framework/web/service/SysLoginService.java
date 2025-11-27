@@ -1,0 +1,287 @@
+package com.whale.framework.web.service;
+
+import com.alibaba.fastjson2.JSONObject;
+import com.whale.admin.domain.SysTenant;
+import com.whale.admin.service.ISysConfigService;
+import com.whale.admin.service.ISysTenantOptionService;
+import com.whale.admin.service.ISysTenantService;
+import com.whale.admin.service.ISysUserService;
+import com.whale.common.constant.CacheConstants;
+import com.whale.common.constant.Constants;
+import com.whale.common.constant.UserConstants;
+import com.whale.common.core.domain.R;
+import com.whale.common.core.domain.entity.SysRole;
+import com.whale.common.core.domain.entity.SysUser;
+import com.whale.common.core.domain.model.LoginUser;
+import com.whale.common.core.domain.model.LoginUserExtend;
+import com.whale.common.core.redis.RedisCache;
+import com.whale.common.enums.DeleteFlag;
+import com.whale.common.enums.TenantStatus;
+import com.whale.common.exception.ServiceException;
+import com.whale.common.exception.user.*;
+import com.whale.common.utils.DateUtils;
+import com.whale.common.utils.MessageUtils;
+import com.whale.common.utils.StringUtils;
+import com.whale.common.utils.ip.IpUtils;
+import com.whale.framework.manager.AsyncManager;
+import com.whale.framework.manager.factory.AsyncFactory;
+import com.whale.framework.security.context.AuthenticationContextHolder;
+import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+/**
+ * 登录校验方法
+ *
+ * @author system
+ */
+@Component
+public class SysLoginService {
+    @Autowired
+    private TokenService tokenService;
+
+    @Resource
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private RedisCache redisCache;
+
+    @Autowired
+    private ISysUserService userService;
+
+    @Autowired
+    private ISysConfigService configService;
+
+    @Autowired
+    private ISysTenantService sysTenantService;
+
+    @Autowired
+    private ISysTenantOptionService sysTenantOptionService;
+
+    /**
+     * 登录验证
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @param code     验证码
+     * @param uuid     唯一标识
+     * @param tenantId 租户ID
+     * @return 结果
+     */
+    public String login(String username, String password, String code, String uuid, Integer tenantId) {
+        // 验证码校验
+        // validateCaptcha(username, code, uuid);
+
+        // 租户校验
+        validateTenant(username, tenantId);
+        // 保存本次勾选租户
+        redisCache.setCacheObject(CacheConstants.LOGIN_SELECTED_TENANT + username, tenantId);
+
+        // 登录前置校验
+        loginPreCheck(username, password);
+        // 用户验证
+        Authentication authentication = null;
+        try {
+            UsernamePasswordAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(username, password);
+            AuthenticationContextHolder.setContext(authenticationToken);
+            // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
+            authentication = authenticationManager.authenticate(authenticationToken);
+        } catch (Exception e) {
+            if (e instanceof BadCredentialsException) {
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                        MessageUtils.message("user.password.not.match")));
+                throw new UserPasswordNotMatchException();
+            } else {
+                AsyncManager.me()
+                        .execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));
+                throw new ServiceException(e.getMessage());
+            }
+        } finally {
+            AuthenticationContextHolder.clearContext();
+        }
+        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS,
+                MessageUtils.message("user.login.success")));
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        // 设置登录用户信息
+        this.setLoginUserInfo(loginUser, tenantId);
+        // 生成token
+        return tokenService.createToken(loginUser);
+    }
+
+    /**
+     * 设置登录用户信息
+     *
+     * @param loginUser 登录用户
+     * @param tenantId  租户ID
+     */
+    public void setLoginUserInfo(LoginUser loginUser, Integer tenantId) {
+        // // 登录时set租户id
+        // Integer tenantId = 0;
+        // ServletRequestAttributes attributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+        // if (attributes != null) {
+        // HttpServletRequest request = attributes.getRequest();
+        // // 从请求头获取租户ID，假设header名称为"X-Tenant-ID" ; 登录接口前端把租户id放到请求头里
+        // String tenantIdHeader = request.getHeader("X-Tenant-ID");
+        // if (tenantIdHeader != null && !tenantIdHeader.isEmpty()) {
+        // tenantId = Integer.parseInt(tenantIdHeader);
+        // }
+        // }
+        // // 设置租户id
+        // loginUser.setTenantId(tenantId);
+        // 记录登录信息
+        recordLoginInfo(loginUser.getUserId());
+        // 设置登录用户的信息
+        LoginUserExtend loginUserExtend = userService.getLoginUserExtend(loginUser.getUserId());
+        if (loginUserExtend != null) {
+            loginUser.setOrgId(loginUserExtend.getOrgId()); // 科室id
+            loginUser.setPractitionerId(loginUserExtend.getPractitionerId()); // 参与者id
+            loginUser.setHospitalId(userService.getHospitalIdByOrgId(loginUserExtend.getOrgId())); // 所属医院id
+            // user
+            loginUser.getUser().setOrgId(loginUserExtend.getOrgId()); // 科室id
+            loginUser.getUser().setOrgName(loginUserExtend.getOrgName()); // 科室名称
+        }
+        List<SysRole> roleList = userService.getRoleList(loginUser.getUserId());
+        if (!roleList.isEmpty()) {
+            loginUser.setRoleList(roleList);
+        }
+
+        // 设置租户ID
+        loginUser.getUser().setTenantId(tenantId);
+        loginUser.setTenantId(tenantId);
+
+        // option集合
+        List<Map<String, String>> optionList = userService.getOptionList(tenantId);
+        if (optionList.isEmpty()) {
+            throw new IllegalArgumentException("未匹配到option信息");
+        }
+        JSONObject optionJson = new JSONObject();
+        for (Map<String, String> map : optionList) {
+            String key = map.get("optionkey");
+            String value = map.get("optionvalue");
+            optionJson.put(key, value);
+        }
+        loginUser.setOptionJson(optionJson);
+
+        // TODO:下面的配置项启用后，上面option集合处理注释掉
+
+        // 全部租户配置项
+        Map<String, String> optionMap = sysTenantOptionService.getAllTenantOption(tenantId);
+        loginUser.setOptionMap(optionMap);
+    }
+
+    /**
+     * 校验验证码
+     *
+     * @param username 用户名
+     * @param code     验证码
+     * @param uuid     唯一标识
+     * @return 结果
+     */
+    public void validateCaptcha(String username, String code, String uuid) {
+        boolean captchaEnabled = configService.selectCaptchaEnabled();
+        if (captchaEnabled) {
+            String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
+            String captcha = redisCache.getCacheObject(verifyKey);
+            if (captcha == null) {
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                        MessageUtils.message("user.jcaptcha.expire")));
+                throw new CaptchaExpireException();
+            }
+            redisCache.deleteObject(verifyKey);
+            if (!code.equalsIgnoreCase(captcha)) {
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                        MessageUtils.message("user.jcaptcha.error")));
+                throw new CaptchaException();
+            }
+        }
+    }
+
+    /**
+     * 登录前置校验
+     *
+     * @param username 用户名
+     * @param password 用户密码
+     */
+    public void loginPreCheck(String username, String password) {
+        // 用户名或密码为空 错误
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+            AsyncManager.me().execute(
+                    AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("not.null")));
+            throw new UserNotExistsException();
+        }
+        // 密码如果不在指定范围内 错误
+        if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
+                || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                    MessageUtils.message("user.password.not.match")));
+            throw new UserPasswordNotMatchException();
+        }
+        // 用户名不在指定范围内 错误
+        if (username.length() < UserConstants.USERNAME_MIN_LENGTH
+                || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL,
+                    MessageUtils.message("user.password.not.match")));
+            throw new UserPasswordNotMatchException();
+        }
+        // IP黑名单校验
+        String blackStr = configService.selectConfigByKey("sys.login.blackIPList");
+        if (IpUtils.isMatchedIp(blackStr, IpUtils.getIpAddr())) {
+            AsyncManager.me().execute(
+                    AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("login.blocked")));
+            throw new BlackListException();
+        }
+    }
+
+    /**
+     * 记录登录信息
+     *
+     * @param userId 用户ID
+     */
+    public void recordLoginInfo(Long userId) {
+        SysUser sysUser = new SysUser();
+        sysUser.setUserId(userId);
+        sysUser.setLoginIp(IpUtils.getIpAddr());
+        sysUser.setLoginDate(DateUtils.getNowDate());
+        userService.updateUserProfile(sysUser);
+    }
+
+    /**
+     * 校验租户
+     *
+     * @param username 用户名
+     * @param tenantId 租户ID
+     */
+    private void validateTenant(String username, Integer tenantId) {
+        // 租户非空校验
+        if (tenantId == null) {
+            throw new ServiceException("请指定所属医院");
+        }
+        // 查询用户绑定的租户列表
+        R<List<SysTenant>> bindTenantList = sysTenantService.getUserBindTenantList(username);
+        // 租户合法性校验
+        Optional<SysTenant> currentTenantOptional =
+                bindTenantList.getData().stream().filter(e -> tenantId.equals(e.getId())).findFirst();
+        if (currentTenantOptional.isEmpty()) {
+            throw new ServiceException("所属医院无权限");
+        }
+        // 租户状态校验
+        SysTenant currentTenant = currentTenantOptional.get();
+        if (TenantStatus.DISABLE.getCode().equals(currentTenant.getStatus())) {
+            throw new ServiceException("所属医院停用");
+        }
+        // 租户删除状态校验
+        if (DeleteFlag.DELETED.getCode().equals(currentTenant.getDeleteFlag())) {
+            throw new ServiceException("所属医院不存在");
+        }
+
+    }
+}

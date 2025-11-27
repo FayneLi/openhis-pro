@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.open-source.health</groupId>
+        <artifactId>openhis-core</artifactId>
+        <version>0.5.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>openhis-domain</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <packaging>pom</packaging>
+    
+    <modules>
+        <module>openhis-administration</module>
+        <module>openhis-clinical</module>
+        <module>openhis-diagnostics</module>
+        <module>openhis-document</module>
+        <module>openhis-financial</module>
+        <module>openhis-medication</module>
+        <module>openhis-rule</module>
+        <module>openhis-workflow</module>
+        <module>openhis-support</module>
+    </modules>
+
+    <dependencies>
+        <!--框架-->
+        <dependency>
+            <groupId>org.open-source.whale</groupId>
+            <artifactId>whale-framework</artifactId>
+        </dependency>
+        <!--共通-->
+        <dependency>
+            <groupId>org.open-source.health</groupId>
+            <artifactId>openhis-common</artifactId>
+        </dependency>
+        <!--仓储-->
+        <dependency>
+            <groupId>org.open-source.health</groupId>
+            <artifactId>openhis-persistence</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>

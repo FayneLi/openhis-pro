@@ -1,0 +1,106 @@
+package org.openhis.domain.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.whale.common.core.domain.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.util.Date;
+
+/**
+ * 医疗参与者管理Entity实体
+ *
+ * @author system
+ * @date 2025-02-20
+ */
+@Data
+@TableName("adm_practitioner")
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = false)
+public class Practitioner extends BaseEntity {
+
+    /** ID */
+    @TableId(type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
+
+    /** 活动标记 */
+    private Integer activeFlag;
+
+    /** 姓名 */
+    private String name;
+
+    /** 其他名称 */
+    private String nameJson;
+
+    /** 性别编码 */
+    private Integer genderEnum;
+
+    /** 生日 */
+    private Date birthDate;
+
+    /** 死亡时间 */
+    private Date deceasedDate;
+
+    /** 电话 */
+    private String phone;
+
+    /** 地址 */
+    private String address;
+
+    /** 地址省 */
+    private String addressProvince;
+
+    /** 地址市 */
+    private String addressCity;
+
+    /** 地址区 */
+    private String addressDistrict;
+
+    /** 地址街道 */
+    private String addressStreet;
+
+    /** 患者其他地址 */
+    private String addressJson;
+
+    /** 拼音码 */
+    private String pyStr;
+
+    /** 五笔码 */
+    private String wbStr;
+
+    /** 患者院内编码/病历号 */
+    private String busNo;
+
+    /** 医保码 */
+    private String ybNo;
+
+    /** 机构id */
+    private Long orgId;
+
+    /** 系统用户id */
+    private Long userId;
+
+    /** 医生职称 */
+    private String drProfttlCode;
+
+    /** 证件类型 */
+    private String prscDrCertCode;
+
+    /** 职业证件编号 */
+    private String pharPracCertNo;
+
+    /** 开票点编码 */
+    private String kpdCode;
+
+    /** 签名图片 */
+    private String signature;
+
+    /** pos机编号 */
+    private String posNo;
+}

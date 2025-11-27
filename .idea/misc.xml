@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/whale/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-application/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/pom.xml" />
+        <option value="$PROJECT_DIR$/whale-framework/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-common/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-H22010202493/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-yb/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-ybapp/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-financial/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-template/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-administration/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-clinical/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-document/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-medication/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-rule/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-workflow/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-diagnostics/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/openhis-support/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-workflow/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-support/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-rule/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-medication/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-financial/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-document/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-diagnostics/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-clinical/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-administration/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/openhis-server/openhis-H22010202493/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-server/openhis-domain/rules/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="PWA">
+    <option name="wasEnabledAtLeastOnce" value="true" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

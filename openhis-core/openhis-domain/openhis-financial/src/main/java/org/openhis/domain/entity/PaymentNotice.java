@@ -1,0 +1,60 @@
+package org.openhis.domain.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.whale.common.core.domain.BaseEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.math.BigDecimal;
+
+/**
+ * 合同管理Entity实体
+ *
+ * @author system
+ * @date 2025-02-20
+ */
+@Data
+@TableName("fin_payment_notice")
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = false)
+public class PaymentNotice extends BaseEntity {
+
+    /** ID */
+    @TableId(type = IdType.ASSIGN_ID)
+    private Long id;
+
+    /** 状态 */
+    private Integer statusEnum;
+
+    /** 支付通知类型 */
+    private Integer typeEnum;
+
+    /** 付款实体ID */
+    private Long paypmentReconciliationId;
+
+    /** 被支付方 */
+    private Long payeeId;
+
+    /** 通知方式 */
+    private String wayCode;
+
+    /** 通知内容 */
+    private String contentText;
+
+    /** 被通知方 */
+    private String recipient;
+
+    /** 金额 */
+    private BigDecimal amount;
+
+    /** 支付状态 */
+    private Integer payStatus;
+
+    /** 机构 */
+    private Integer orgId;
+
+
+}

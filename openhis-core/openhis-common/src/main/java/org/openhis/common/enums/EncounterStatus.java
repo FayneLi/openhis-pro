@@ -1,0 +1,48 @@
+package org.openhis.common.enums;
+
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.whale.common.enums.EnumInterface;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * 就诊状态
+ */
+@Getter
+@AllArgsConstructor
+public enum EncounterStatus implements EnumInterface {
+    PLANNED(1, "draft", "待诊"),
+
+    IN_PROGRESS(2, "in-progress", "在诊"),
+
+    ON_HOLD(3, "on-hold", "暂离"),
+
+    DISCHARGED(4, "on-discharged", "诊毕"),
+
+    COMPLETED(5, "completed", "完成"),
+
+    CANCELLED(6, "cancelled", "退号"),
+
+    DISCONTINUED(7, "discontinued", "已中断"),
+
+    IN_ERROR(8, "entered-in-error", "错误"),
+
+    UNKNOWN(9, "unknown", "未知");
+
+    @EnumValue
+    private final Integer value;
+    private final String code;
+    private final String info;
+
+    public static EncounterStatus getByValue(Integer value) {
+        if (value == null) {
+            return null;
+        }
+        for (EncounterStatus val : values()) {
+            if (val.getValue().equals(value)) {
+                return val;
+            }
+        }
+        return null;
+    }
+}

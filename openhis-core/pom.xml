@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.open-source.health</groupId>
+        <artifactId>whale</artifactId>
+        <version>0.5.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.open-source.health</groupId>
+    <artifactId>openhis-core</artifactId>
+    <version>0.5.0</version>
+
+    <name>openhis-core</name>
+    <description>鲸智医疗管理系统</description>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <openhis.version>0.5.0</openhis.version>
+    </properties>
+
+    <modules>
+        <module>openhis-application</module>
+        <module>openhis-common</module>
+        <module>openhis-domain</module>
+        <module>openhis-persistence</module>
+    </modules>
+
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-application</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-common</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-domain</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-persistence</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <!-- Domain 子模块 -->
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-administration</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-clinical</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-diagnostics</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-document</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-financial</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-medication</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-rule</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-support</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-workflow</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.open-source.whale</groupId>
+            <artifactId>whale-framework</artifactId>
+        </dependency>
+    </dependencies>
+
+
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
