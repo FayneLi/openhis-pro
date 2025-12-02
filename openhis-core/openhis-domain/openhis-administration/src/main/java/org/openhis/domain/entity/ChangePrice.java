@@ -15,7 +15,6 @@ import java.util.Date;
  * 修改价格记录Entity实体
  *
  * @author system
- * @date 2025-10-31
  */
 @Data
 @TableName("adm_change_price")
@@ -85,7 +84,4 @@ public class ChangePrice extends BaseEntity {
 
     /** 条件理由 */
     private String reason;
-
-    /** 删除标识 默认 0 未删除 */
-    private String deleteFlag;
 }

@@ -5,6 +5,7 @@ import com.whale.common.core.domain.R;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openhis.domain.entity.ActivityDefinition;
 import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.MedicationCatalogExportQuery;
 import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.MedicationCatalogQuery;
 import org.openhis.domain.his.catalogmanage.servicecatalog.dto.ServiceCatalogCreateCommond;
@@ -38,7 +39,9 @@ public class ServiceCatalogController {
     @Anonymous
     @GetMapping("/page")
     public R<?> getPage(ServiceCatalogQuery query) {
-        return activityRepository.selectPage(query);
+
+         throw new RuntimeException();
+//        return activityRepository.selectPage(query);
     }
 
     /**
@@ -47,7 +50,10 @@ public class ServiceCatalogController {
      */
     @GetMapping("/{id}")
     public R<?> getById(@PathVariable Long id) {
-        return activityRepository.getById(id);
+
+        throw new RuntimeException();
+
+//        return activityRepository.getById(id);
     }
 
     /**
@@ -55,20 +61,24 @@ public class ServiceCatalogController {
      */
     @PostMapping
     public R<?> add(@RequestBody ServiceCatalogCreateCommond commond) {
-        ActivityDefinition result = activityManager.CreateDefinition();
-        return R.ok(result);
+        throw  new RuntimeException();
+
+//        ActivityDefinition result = activityManager.CreateDefinition();
+//        return R.ok(result);
     }
 
     /**
      * 修改药品目录
      *
      * @param id 药品ID
-     * @param catalogUpDto 药品目录信息
      */
     @PostMapping("/{id}")
     public R<?> update(@PathVariable Long id, @RequestBody ServiceCatalogUpdateCommond commond) {
-        ActivityDefinition  activityDefinition = activityManager.UpdateDefinition(id, null);
-        return R.ok(activityDefinition);
+        throw  new RuntimeException();
+
+//        ActivityDefinition activityDefinition = activityManager.UpdateDefinition(id, null);
+//
+//        return R.ok(activityDefinition);
     }
 
     /**
@@ -78,7 +88,10 @@ public class ServiceCatalogController {
      */
     @PostMapping("/status/stop")
     public R<?> stopBatch(@RequestBody List<Long> ids) {
-        return activityManager.stopBatch(ids);
+
+        throw  new RuntimeException();
+
+//        return activityManager.stopBatch(ids);
     }
 
     /**
@@ -88,7 +101,9 @@ public class ServiceCatalogController {
      */
     @PostMapping("/status/start")
     public R<?> startBatch(@RequestBody List<Long> ids) {
-        return activityManager.startBatch(ids);
+        throw  new RuntimeException();
+
+//        return activityManager.startBatch(ids);
     }
 
     /**
@@ -96,7 +111,9 @@ public class ServiceCatalogController {
      */
     @GetMapping("/export")
     public R<?> export(@RequestBody MedicationCatalogExportQuery query ) {
-        return activityManager.export();
+        throw  new RuntimeException();
+
+//        return activityManager.export();
     }
 
     /**
@@ -106,7 +123,8 @@ public class ServiceCatalogController {
      */
     @PostMapping("/template")
     public R<?> importData(@RequestParam("file") MultipartFile file) {
-        return activityManager.importData(file);
+        throw  new RuntimeException();
+//        return activityManager.importData(file);
     }
 
     /**

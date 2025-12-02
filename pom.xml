@@ -22,7 +22,6 @@
         <hutool.version>5.8.40</hutool.version>
         <jwt.version>0.13.0</jwt.version>
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
-        <oshi.version>6.6.5</oshi.version>
         <commons-io.version>2.20.0</commons-io.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
         <velocity.version>2.3</velocity.version>
@@ -185,6 +184,13 @@
                 <artifactId>openhis-core</artifactId>
                 <version>${openhis.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-ybapp</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.open-source.whale</groupId>

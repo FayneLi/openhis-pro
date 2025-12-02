@@ -14,7 +14,6 @@ import java.util.Date;
  * 过敏与不耐受Entity实体
  *
  * @author system
- * @date 2025-03-07
  */
 @Data
 @TableName("cli_allergy_intolerance")
@@ -76,8 +75,5 @@ public class AllergyIntolerance extends BaseEntity {
 
     /** 备注 */
     private String note;
-
-    /** 删除状态 */
-    private String deleteFlag;
 
 }

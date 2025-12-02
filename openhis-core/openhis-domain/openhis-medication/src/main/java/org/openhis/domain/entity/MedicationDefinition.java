@@ -13,7 +13,6 @@ import java.util.Date;
  * 药品定义管理Entity实体
  *
  * @author system
- * @date 2025-02-20
  */
 @Data
 @TableName("med_medication_definition")
@@ -112,10 +111,6 @@ public class MedicationDefinition extends BaseEntity {
      */
     private String definition;
 
-    /**
-     * 删除状态
-     */
-    private String deleteFlag;
 
     /**
      * 用量限定

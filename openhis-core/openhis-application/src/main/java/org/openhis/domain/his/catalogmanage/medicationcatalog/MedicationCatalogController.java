@@ -9,10 +9,7 @@ import com.whale.common.utils.QueryUtils;
 import com.whale.common.utils.bean.BeanUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import org.openhis.domain.entity.MedicationDefinition;
-import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.MedicationCatalogCreateCommond;
-import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.MedicationCatalogExportQuery;
-import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.MedicationCatalogQuery;
-import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.MedicationDto;
+import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.*;
 import org.openhis.domain.repository.IMedicationDefinitionRepository;
 import org.openhis.domain.service.MedicationDefinitionManager;
 import org.springframework.web.bind.annotation.*;
@@ -65,8 +62,7 @@ public class MedicationCatalogController {
     @GetMapping("/{id}")
     public R<?> getById(@PathVariable Long id) {
          MedicationDefinition medication = medicationRepository.selectById(id);
-        BeanUtils.copyProperties(medication, dto);
-        return ;
+        throw  new RuntimeException();
     }
 
     /**
@@ -74,7 +70,8 @@ public class MedicationCatalogController {
      */
     @PostMapping
     public R<?> add(@RequestBody MedicationCatalogCreateCommond commond) {
-        return medicationManager.Create(catalogUpDto);
+        throw  new RuntimeException();
+        //return medicationManager.Create(catalogUpDto);
     }
 
     /**
@@ -85,7 +82,9 @@ public class MedicationCatalogController {
      */
     @PostMapping("/{id}")
     public R<?> update(@PathVariable Long id, @RequestBody MedicationCatalogUpdateCommond catalogUpDto) {
-        return medicationManager.update(id, catalogUpDto);
+        throw  new RuntimeException();
+
+       // return medicationManager.update(id, catalogUpDto);
     }
 
     /**
@@ -95,7 +94,9 @@ public class MedicationCatalogController {
      */
     @PostMapping("/status/stop")
     public R<?> stopBatch(@RequestBody List<Long> ids) {
-        return medicationManager.stopBatch(ids);
+        throw  new RuntimeException();
+
+//        return medicationManager.stopBatch(ids);
     }
 
     /**
@@ -105,7 +106,9 @@ public class MedicationCatalogController {
      */
     @PostMapping("/status/start")
     public R<?> startBatch(@RequestBody List<Long> ids) {
-        return medicationManager.startBatch(ids);
+        throw  new RuntimeException();
+
+//        return medicationManager.startBatch(ids);
     }
 
     /**
@@ -113,12 +116,14 @@ public class MedicationCatalogController {
      */
     @GetMapping("/export")
     public R<?> export(@RequestBody MedicationCatalogExportQuery query ) {
-        return medicationManager.export(
-                query.searchKey,
-                query.ybMatchFlag,
-                query.tatusEnum,
-                query.categoryCode,
-                query.response);
+        throw  new RuntimeException();
+//
+//        return medicationManager.export(
+//                query.searchKey,
+//                query.ybMatchFlag,
+//                query.tatusEnum,
+//                query.categoryCode,
+//                query.response);
     }
 
     /**
@@ -128,9 +133,10 @@ public class MedicationCatalogController {
      */
     @PostMapping("/template")
     public R<?> importData(@RequestParam("file") MultipartFile file) {
-        boolean result= medicationManager.importData(file);
-        return R.ok(result)
-    ;
+        throw  new RuntimeException();
+
+//        boolean result= medicationManager.importData(file);
+//        return R.ok(result);
     }
 
     /**
