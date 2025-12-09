@@ -216,6 +216,12 @@
                 <artifactId>httpclient5</artifactId>
                 <version>${httpclient5.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>3.25.3</version> <!-- 版本可根据实际需求调整，建议使用3.x系列稳定版 -->
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

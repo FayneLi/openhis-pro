@@ -192,16 +192,6 @@
         <dependency>
             <groupId>org.axonframework</groupId>
             <artifactId>axon-spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>error_prone_annotations</artifactId>
-                    <groupId>com.google.errorprone</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>protobuf-java</artifactId>
-                    <groupId>com.google.protobuf</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

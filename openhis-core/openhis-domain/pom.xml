@@ -29,6 +29,7 @@
         <module>openhis-rule</module>
         <module>openhis-workflow</module>
         <module>openhis-support</module>
+        <module>openhis-mv</module>
     </modules>
 
     <dependencies>

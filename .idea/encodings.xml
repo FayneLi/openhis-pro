@@ -21,6 +21,8 @@
     <file url="file://$PROJECT_DIR$/openhis-core/openhis-domain/openhis-financial/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/openhis-core/openhis-domain/openhis-medication/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/openhis-core/openhis-domain/openhis-medication/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/openhis-core/openhis-domain/openhis-mv/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/openhis-core/openhis-domain/openhis-mv/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/openhis-core/openhis-domain/openhis-rule/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/openhis-core/openhis-domain/openhis-rule/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/openhis-core/openhis-domain/openhis-support/src/main/java" charset="UTF-8" />
