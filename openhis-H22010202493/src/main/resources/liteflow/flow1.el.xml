@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC  "liteflow" "https://liteflow.cc/liteflow.dtd">
+<flow>
+    <nodes>
+        <node id="s_memberDiscountCmp" type="script" language="java">
+            <![CDATA[
+            import com.yomahub.liteflow.core.NodeComponent;
+            public class Demo  extends NodeComponent{
+                @Override
+                public void process() throws Exception {
+
+                    System.out.print("这是重写之后的的方法");
+                }
+            }
+            ]]>
+        </node>
+
+        <node id="s_couponCmp" type="script" language="java">
+            <![CDATA[
+            import com.yomahub.liteflow.core.NodeComponent;
+
+            public class Demo  extends NodeComponent{
+                @Override
+                public void process() throws Exception {
+                    System.out.print("这是重写之后的的方法");
+                }
+            }
+            ]]>
+        </node>
+    </nodes>
+
+
+    <chain name="mainChain">
+        THEN(
+        init,initCl,memberDiscountCmp,s_couponCmp
+        );
+    </chain>
+</flow>
