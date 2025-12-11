@@ -22,8 +22,8 @@ public class DictAspect {
     @Autowired
     private JdbcTemplate jdbcTemplate; // 使用 JdbcTemplate 执行 SQL
 
-    @Around("@annotation(org.springframework.web.bind.annotation.GetMapping) || "
-        + "@annotation(org.springframework.web.bind.annotation.PostMapping)")
+//    @Around("@annotation(org.springframework.web.bind.annotation.GetMapping) || "
+//        + "@annotation(org.springframework.web.bind.annotation.PostMapping)")
     public Object aroundController(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed(); // 执行原方法
 

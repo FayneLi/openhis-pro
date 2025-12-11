@@ -1,10 +1,16 @@
 package com.openhis;
 
+import com.openhis.domain.test.axon.entity.ClassRoomDetils;
+import com.openhis.domain.test.axon.event.OrderCreatedEvent;
+import org.axonframework.eventhandling.EventBus;
+import org.axonframework.eventhandling.GenericEventMessage;
 import org.axonframework.springboot.autoconfig.AxonServerAutoConfiguration;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -17,7 +23,8 @@ import java.net.UnknownHostException;
  * @author system
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, AxonServerAutoConfiguration.class},
-        scanBasePackages = {"com.whale", "com.openhis"})
+        scanBasePackages = {"com.whale", "com.openhis","org.openhis","com.yomahub.liteflow.core"})
+@MapperScan("org.openhis.domain.repository")
 @EnableAsync
 public class OpenHisApplication {
     public static void main(String[] args) throws UnknownHostException {
@@ -31,5 +38,12 @@ public class OpenHisApplication {
                 + "Application OpenHis is running! Access URLs:\n\t" + "Local: \t\thttp://localhost:" + port + path
                 + "/\n\t" + "External: \thttp://" + ip + ":" + port + path + "/\n"
                 + "----------------------------------------------------------");
+        EventBus eventBus = application.getBean(EventBus.class);
+        OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent("ORDER_001", new ClassRoomDetils("101", "一年一班"));
+        eventBus.publish(GenericEventMessage.asEventMessage(
+                orderCreatedEvent.toString()
+        ));
+
     }
+
 }

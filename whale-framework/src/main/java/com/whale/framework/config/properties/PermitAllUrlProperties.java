@@ -68,7 +68,7 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
      */
     private void addDefaultAnonymousUrls() {
         anonymousUrls.addAll(Arrays.asList(
-                "/login", "/register", "/captchaImage",
+                "/login", "/register", "/captchaImage","/test",
                 "/swagger-ui/**", "/v3/api-docs/**", "/webjars/**",
                 "/patientmanage/information/**"
         ));

@@ -27,6 +27,19 @@
             <version>${openhis.version}</version>
         </dependency>
 
+        <!-- axonframework-->
+        <dependency>
+            <groupId>org.axonframework</groupId>
+            <artifactId>axon-spring-boot-starter</artifactId>
+            <version>${axon.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.25.3</version> <!-- 版本可根据实际需求调整，建议使用3.x系列稳定版 -->
+        </dependency>
+
 
         <!--liteflow-->
         <dependency>

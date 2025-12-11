@@ -7,14 +7,15 @@
         <groupId>org.open-source.health</groupId>
         <artifactId>openhis-domain</artifactId>
         <version>0.5.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>openhis-mv</artifactId>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
+    <version>${openhis.version}</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.open-source.health</groupId>
+            <artifactId>openhis-common</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -16,13 +16,13 @@ public class MybastisColumnsHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         this.strictInsertFill(metaObject, "createTime", Date.class, new Date());
         String username = "system";
-        try {
-            LoginUser loginUser = SecurityUtils.getLoginUser();
-            if (loginUser != null) {
-                username = loginUser.getUsername();
-            }
-        } catch (Exception ignored) {
-        }
+//        try {
+//            LoginUser loginUser = SecurityUtils.getLoginUser();
+//            if (loginUser != null) {
+//                username = loginUser.getUsername();
+//            }
+//        } catch (Exception ignored) {
+//        }
         this.strictInsertFill(metaObject, "createBy", String.class, username);
         this.strictInsertFill(metaObject, "tenantId", Integer.class, getCurrentTenantId());
     }
@@ -32,13 +32,13 @@ public class MybastisColumnsHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         this.strictUpdateFill(metaObject, "updateTime", Date.class, new Date());
         String username = "system";
-        try {
-            LoginUser loginUser = SecurityUtils.getLoginUser();
-            if (loginUser != null) {
-                username = loginUser.getUsername();
-            }
-        } catch (Exception ignored) {
-        }
+//        try {
+//            LoginUser loginUser = SecurityUtils.getLoginUser();
+//            if (loginUser != null) {
+//                username = loginUser.getUsername();
+//            }
+//        } catch (Exception ignored) {
+//        }
         this.strictUpdateFill(metaObject, "updateBy", String.class, username);
     }
 
@@ -47,9 +47,9 @@ public class MybastisColumnsHandler implements MetaObjectHandler {
      */
     private Integer getCurrentTenantId() {
         // 获取当前登录用户的租户 ID
-        if (SecurityUtils.getAuthentication() != null) {
-            return SecurityUtils.getLoginUser().getTenantId();
-        }
+//        if (SecurityUtils.getAuthentication() != null) {
+//            return SecurityUtils.getLoginUser().getTenantId();
+//        }
         return 0;
     }
 }

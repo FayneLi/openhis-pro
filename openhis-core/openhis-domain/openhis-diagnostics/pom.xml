@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.open-source.health</groupId>
-        <artifactId>openhis-core</artifactId>
+        <artifactId>openhis-domain</artifactId>
         <version>0.5.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>openhis-diagnostics</artifactId>

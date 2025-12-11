@@ -12,6 +12,7 @@ import org.openhis.domain.entity.MedicationDefinition;
 import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.*;
 import org.openhis.domain.repository.IMedicationDefinitionRepository;
 import org.openhis.domain.service.MedicationDefinitionManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,11 +30,12 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2025-04-09
  */
 @RestController
-@RequestMapping("/catalog-manager/medication-catalog")
+@RequestMapping("/medication-catalog")
 @Slf4j
 @AllArgsConstructor
 public class MedicationCatalogController {
 
+    @Autowired
     private final MedicationDefinitionManager medicationManager;
     private final IMedicationDefinitionRepository medicationRepository;
 
@@ -41,7 +43,7 @@ public class MedicationCatalogController {
      * 分页查询药品目录列表
      */
     @Anonymous
-    @GetMapping("/page")
+    @PostMapping(value="/page")
     public R<?> getPage(@RequestBody MedicationCatalogQuery query) {
 
         // 构建查询条件
@@ -59,6 +61,7 @@ public class MedicationCatalogController {
      * 根据ID查询药品详情
      * @param id 药品ID
      */
+    @Anonymous
     @GetMapping("/{id}")
     public R<?> getById(@PathVariable Long id) {
          MedicationDefinition medication = medicationRepository.selectById(id);
@@ -66,12 +69,16 @@ public class MedicationCatalogController {
     }
 
     /**
-     * 新增药品目录
+     * 新增药品目录   完成
      */
-    @PostMapping
-    public R<?> add(@RequestBody MedicationCatalogCreateCommond commond) {
-        throw  new RuntimeException();
-        //return medicationManager.Create(catalogUpDto);
+    @Anonymous
+    @GetMapping("/add")
+    public R<?> add(@RequestBody MedicationDefinition commond) {
+//        throw  new RuntimeException();
+        MedicationDefinition medicationDefinition = new MedicationDefinition();
+        BeanUtils.copyProperties(commond, medicationDefinition);
+        String a= medicationManager.create(medicationDefinition);
+        return R.ok(a);
     }
 
     /**

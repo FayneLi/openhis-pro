@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow>
-    <chain name="chain1">
-        THEN(a, b, c);
-    </chain>
+    <script language="java" scriptPath="C:\Users\82739\Desktop\ceshi.java" />
 </flow>

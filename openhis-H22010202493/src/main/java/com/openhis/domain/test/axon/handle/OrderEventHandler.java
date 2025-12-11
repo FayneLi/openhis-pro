@@ -9,14 +9,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderEventHandler {
     @EventHandler
-    public void on(OrderCreatedEvent event) {
-        if (event.flag==true) {
-            return;
-        }
+    public void on(String a) {
+//        if (event.flag==true) {
+//            return;
+//        }
         // 处理逻辑：如更新订单状态、发送通知
-        System.out.println("教室，ID: " + event.getId());
-        System.out.println("教室详情: " + event.getClassRoomDetils().getName());
-        System.out.println("教室号码: " + event.getClassRoomDetils().getNo());
-        event.flag=true;
+//        System.out.println("教室，ID: " + event.getId());
+//        System.out.println("教室详情: " + event.getClassRoomDetils().getName());
+//        System.out.println("教室号码: " + event.getClassRoomDetils().getNo());
+        System.out.println("教室，ID: " + a);
+//        event.flag=true;
     }
 }

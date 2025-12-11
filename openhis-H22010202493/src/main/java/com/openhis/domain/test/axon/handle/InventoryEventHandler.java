@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
     public class InventoryEventHandler {
         @EventHandler
         public void on(OrderCreatedEvent event) {
-            if (event.flag==true) {
-                return;
-            }
+//            if (event.flag==true) {
+//                return;
+//            }
             // 处理逻辑：如扣减库存
             System.out.println("订单ID: " + event.getClassRoomDetils());
-            event.flag=true;
+//            event.flag=true;
         }
 
     }
