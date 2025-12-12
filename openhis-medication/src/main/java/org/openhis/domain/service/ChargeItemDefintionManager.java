@@ -36,15 +36,10 @@ public class ChargeItemDefintionManager {
         ChargeItemDefinition chargeItemDefinition = new ChargeItemDefinition();
         BeanUtils.copyProperties(itemUpFromDirectoryDto, chargeItemDefinition);
 
-        List<ChargeItemDefinition> chargeItemDefinitions = new ArrayList<>();
-        chargeItemDefinitions.add(chargeItemDefinition);
-        List<BatchResult> batchResults = chargeItemDefinitionRepository.insertOrUpdate(chargeItemDefinitions);
-        batchResults.forEach(batchResult -> {
-            List<Object> parameterObjects = batchResult.getParameterObjects();
-            org.springframework.beans.BeanUtils.copyProperties(parameterObjects, chargeItemDefinitions);
-        });
 
-        if (batchResults.size() > 0) {
+        int inserted = chargeItemDefinitionRepository.insert(chargeItemDefinition);
+
+        if (inserted > 0) {
             //这里是做完药品更新要做的事件监听
             EventBus eventBus = SpringUtils.getBean(EventBus.class);
             eventBus.publish(GenericEventMessage.asEventMessage(chargeItemDefinition));

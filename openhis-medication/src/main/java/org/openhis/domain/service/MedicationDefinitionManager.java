@@ -85,16 +85,11 @@ public class MedicationDefinitionManager {
 //        medicationDefinition.setMedicationDefId(generatedId);
 
 
-        //需要更新后面的查询表，需要保证查询表主键与修改表主键一致
-        List<MedicationDefinition> medicationDefinitionList=new ArrayList<>();
-        medicationDefinitionList.add(medicationDefinition);
-        List<BatchResult> batchResults = medicationDefinitionRepository.insertOrUpdate(medicationDefinitionList);
-        batchResults.forEach(batchResult -> {
-            List<Object> parameterObjects = batchResult.getParameterObjects();
-            BeanUtils.copyProperties(parameterObjects, medicationDefinition);
-        });
 
-        if (medicationDefinition.getId()>0){
+        int insertOrUpdate = medicationDefinitionRepository.insert(medicationDefinition);
+
+
+        if (insertOrUpdate>0){
             //这里是做完药品更新要做的事件监听
             EventBus eventBus = SpringUtils.getBean(EventBus.class);
             eventBus.publish(GenericEventMessage.asEventMessage(medicationDefinition));
