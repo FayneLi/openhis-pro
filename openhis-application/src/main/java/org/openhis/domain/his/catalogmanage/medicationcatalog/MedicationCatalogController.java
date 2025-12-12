@@ -3,13 +3,22 @@ package org.openhis.domain.his.catalogmanage.medicationcatalog;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whale.common.annotation.Anonymous;
+import com.whale.common.constant.CommonConstants;
 import com.whale.common.core.domain.R;
+import com.whale.common.utils.DateUtils;
 import com.whale.common.utils.QueryUtils;
+import com.whale.common.utils.SecurityUtils;
 import com.whale.common.utils.bean.BeanUtils;
 import jakarta.servlet.http.HttpServletResponse;
+import org.openhis.common.enums.PublicationStatus;
+import org.openhis.common.enums.Whether;
+import org.openhis.domain.entity.ChargeItemDefinition;
+import org.openhis.domain.entity.ItemUpFromDirectoryDto;
 import org.openhis.domain.entity.MedicationDefinition;
+import org.openhis.domain.entity.MedicationManageUpDto;
 import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.*;
 import org.openhis.domain.repository.IMedicationDefinitionRepository;
+import org.openhis.domain.service.ChargeItemDefintionManager;
 import org.openhis.domain.service.MedicationDefinitionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +45,7 @@ public class MedicationCatalogController {
 
     @Autowired
     private final MedicationDefinitionManager medicationManager;
+    private final ChargeItemDefintionManager chargeItemDefintionManager;
     private final IMedicationDefinitionRepository medicationRepository;
 
     /**
@@ -72,12 +82,37 @@ public class MedicationCatalogController {
      */
     @Anonymous
     @GetMapping("/add")
-    public R<?> add(@RequestBody MedicationDefinition commond) {
-//        throw  new RuntimeException();
-        MedicationDefinition medicationDefinition = new MedicationDefinition();
-        BeanUtils.copyProperties(commond, medicationDefinition);
-        String a= medicationManager.create(medicationDefinition);
-        return R.ok(a);
+    public R<?> add(@RequestBody MedicationDetailDto medicationDetailDto) {
+        //业务类对应返回的实体类
+        MedicationDefinition medication = new MedicationDefinition();
+        ChargeItemDefinition chargeItemDefinition = new ChargeItemDefinition();
+
+
+        MedicationManageUpDto upDto = new MedicationManageUpDto();
+        BeanUtils.copyProperties(medicationDetailDto, upDto);
+        R<MedicationDefinition> medicationDefinitionR = medicationManager.create(upDto);
+        if (medicationDefinitionR.getCode() == 200) {
+            medication = medicationDefinitionR.getData();
+        }
+
+
+        ItemUpFromDirectoryDto itemUpFromDirectoryDto = new ItemUpFromDirectoryDto();
+        BeanUtils.copyProperties(medicationDetailDto, itemUpFromDirectoryDto);
+        itemUpFromDirectoryDto.setInstanceId(medication.getMedicationDefId())
+                .setStatusEnum(PublicationStatus.ACTIVE.getValue())
+                .setInstanceTable(CommonConstants.TableName.MED_MEDICATION_DEFINITION)
+                .setEffectiveStart(DateUtils.getNowDate()).setOrgId(SecurityUtils.getLoginUser().getOrgId())
+                .setConditionFlag(Whether.YES.getValue()).setChargeName(medication.getName())
+                .setPrice(upDto.getRetailPrice());
+        R<ChargeItemDefinition> chargeItemDefinitionR = chargeItemDefintionManager.addItem(itemUpFromDirectoryDto);
+        if (chargeItemDefinitionR.getCode() == 200) {
+            chargeItemDefinition = chargeItemDefinitionR.getData();
+        }
+
+
+
+        return R.ok();
+
     }
 
     /**

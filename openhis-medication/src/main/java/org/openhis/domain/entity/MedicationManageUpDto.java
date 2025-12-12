@@ -1,15 +1,17 @@
-package org.openhis.domain.his.catalogmanage.medicationcatalog.dto;
+package org.openhis.domain.entity;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import com.whale.common.annotation.Dict;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * 药品目录Dto
@@ -19,7 +21,7 @@ import java.util.Date;
  */
 @Data
 @Accessors(chain = true)
-public class MedicationDetailDto extends MedicationDto{
+public class MedicationManageUpDto {
 
     /** ID */
     @JsonSerialize(using = ToStringSerializer.class)

@@ -3,6 +3,7 @@ package com.whale.framework.aspectj;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whale.common.core.domain.R;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import com.whale.common.annotation.Dict;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class DictAspect {
     @Autowired
     private JdbcTemplate jdbcTemplate; // 使用 JdbcTemplate 执行 SQL
 
-//    @Around("@annotation(org.springframework.web.bind.annotation.GetMapping) || "
-//        + "@annotation(org.springframework.web.bind.annotation.PostMapping)")
+    @Around("@annotation(org.springframework.web.bind.annotation.GetMapping) || "
+        + "@annotation(org.springframework.web.bind.annotation.PostMapping)")
     public Object aroundController(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed(); // 执行原方法
 
