@@ -4,13 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.open-source.health</groupId>
-        <artifactId>openhis-core</artifactId>
+        <artifactId>whale</artifactId>
         <version>0.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.open-source.health</groupId>
     <artifactId>openhis-common</artifactId>
 
     <properties>
@@ -22,7 +21,7 @@
     <dependencies>
         <!--框架-->
         <dependency>
-            <groupId>org.open-source.whale</groupId>
+            <groupId>org.open-source.health</groupId>
             <artifactId>whale-framework</artifactId>
         </dependency>
     </dependencies>

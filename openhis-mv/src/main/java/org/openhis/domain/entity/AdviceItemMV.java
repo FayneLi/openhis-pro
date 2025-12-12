@@ -3,8 +3,6 @@ package org.openhis.domain.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.whale.common.annotation.Dict;
-import org.axonframework.eventhandling.EventBus;
-import org.axonframework.eventhandling.GenericEventMessage;
 
 import java.math.BigDecimal;
 

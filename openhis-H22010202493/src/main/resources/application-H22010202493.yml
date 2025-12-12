@@ -97,7 +97,7 @@ axon:
   # 3. 针对报错的处理器，单独强制配置
   eventhandling:
     processors:
-      com.openhis.domain.test.handle:
+      org.openhis.domain.test.handle:
         mode: tracking
         # 强制该处理器使用内存令牌存储
         trackingTokenStore:
@@ -113,7 +113,7 @@ axon:
   auto-create-schema: false
 liteflow:
   rule-source: liteflow/*.el.xml # 流程规则文件路径  本地路径即可   C:\Users\82739\Desktop\*.el.xml
-#  scan-packages: "com.openhis.flow.node" # 自定义节点扫描包
+#  scan-packages: "org.openhis.flow.node" # 自定义节点扫描包
   print-execution-log: true
 #  script:
 #    type: java # 脚本类型：java/javascript/groovy等

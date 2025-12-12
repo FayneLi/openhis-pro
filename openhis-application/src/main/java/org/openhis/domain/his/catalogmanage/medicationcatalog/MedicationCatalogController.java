@@ -1,7 +1,6 @@
 package org.openhis.domain.his.catalogmanage.medicationcatalog;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whale.common.annotation.Anonymous;
 import com.whale.common.core.domain.R;

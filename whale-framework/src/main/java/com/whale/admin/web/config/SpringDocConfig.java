@@ -1,4 +1,4 @@
-package com.macro.blog.springdoc.config;
+package com.whale.admin.web.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;

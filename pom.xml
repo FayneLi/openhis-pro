@@ -27,7 +27,6 @@
         <velocity.version>2.3</velocity.version>
         <belerweb.version>2.5.1</belerweb.version>
         <openhis.version>0.5.0</openhis.version>
-        <whale.version>0.5.0</whale.version>
         <postgresql.version>42.7.7</postgresql.version>
         <axon.version>4.9.4</axon.version>
         <httpclient5.version>5.4</httpclient5.version>
@@ -35,8 +34,19 @@
 
     <modules>
         <module>whale-framework</module>
-        <module>openhis-core</module>
+        <module>openhis-administration</module>
+        <module>openhis-application</module>
+        <module>openhis-clinical</module>
+        <module>openhis-common</module>
+        <module>openhis-diagnostics</module>
+        <module>openhis-document</module>
+        <module>openhis-financial</module>
         <module>openhis-H22010202493</module>
+        <module>openhis-medication</module>
+        <module>openhis-mv</module>
+        <module>openhis-persistence</module>
+        <module>openhis-support</module>
+        <module>openhis-workflow</module>
         <module>openhis-ybapp</module>
     </modules>
     <packaging>pom</packaging>
@@ -178,26 +188,83 @@
                 <version>${belerweb.version}</version>
             </dependency>
 
-            <!--以下内部依赖管理-->
             <dependency>
                 <groupId>org.open-source.health</groupId>
-                <artifactId>openhis-core</artifactId>
+                <artifactId>openhis-administration</artifactId>
                 <version>${openhis.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-application</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-clinical</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-common</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-diagnostics</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-document</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-financial</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-H22010202493</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-medication</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-mv</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-persistence</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-support</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.open-source.health</groupId>
+                <artifactId>openhis-workflow</artifactId>
+                <version>${openhis.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.open-source.health</groupId>
                 <artifactId>openhis-ybapp</artifactId>
                 <version>${openhis.version}</version>
             </dependency>
-
-
             <dependency>
-                <groupId>org.open-source.whale</groupId>
+                <groupId>org.open-source.health</groupId>
                 <artifactId>whale-framework</artifactId>
-                <version>${whale.version}</version>
+                <version>${openhis.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
@@ -224,7 +291,6 @@
                 <artifactId>liteflow-spring-boot-starter</artifactId>
                 <version>2.15.2</version>
             </dependency>
-
 
 
             <dependency>
@@ -271,21 +337,6 @@
             </releases>
         </repository>
     </repositories>
-
-    <!-- 必须包含中央仓库配置 -->
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>public</id>-->
-<!--            <url>https://repo1.maven.org/maven2/</url>-->
-<!--            <releases>-->
-<!--                <enabled>true</enabled>-->
-<!--            </releases>-->
-<!--            <snapshots>-->
-<!--                <enabled>false</enabled>-->
-<!--            </snapshots>-->
-<!--        </repository>-->
-<!--    </repositories>-->
-
 
     <pluginRepositories>
         <pluginRepository>

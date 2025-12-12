@@ -2,13 +2,13 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.open-source.health</groupId>
         <artifactId>whale</artifactId>
         <version>0.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.open-source.health</groupId>
     <artifactId>openhis-H22010202493</artifactId>
@@ -26,35 +26,27 @@
             <artifactId>openhis-application</artifactId>
             <version>${openhis.version}</version>
         </dependency>
-
         <!-- axonframework-->
         <dependency>
             <groupId>org.axonframework</groupId>
             <artifactId>axon-spring-boot-starter</artifactId>
             <version>${axon.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>3.25.3</version> <!-- 版本可根据实际需求调整，建议使用3.x系列稳定版 -->
         </dependency>
-
-
         <!--liteflow-->
         <dependency>
             <groupId>com.yomahub</groupId>
             <artifactId>liteflow-spring-boot-starter</artifactId>
             <version>2.15.2</version>
         </dependency>
-
         <dependency>
             <groupId>com.yomahub</groupId>
             <artifactId>liteflow-script-javax-pro</artifactId>
             <version>2.15.2</version>
         </dependency>
-
-
-
     </dependencies>
 </project>

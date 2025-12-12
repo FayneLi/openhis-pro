@@ -108,7 +108,7 @@ springdoc:
       packages-to-scan: com.whale.admin.web.controller
     - group: 'openhis'
       paths-to-match: '/openhis/**'
-      packages-to-scan: com.openhis.**.controller
+      packages-to-scan: org.openhis.**.controller
   default-flat-param-object: false
 
 

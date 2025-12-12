@@ -1,8 +1,6 @@
 package com.whale.framework.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.whale.common.core.domain.model.LoginUser;
-import com.whale.common.utils.SecurityUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 

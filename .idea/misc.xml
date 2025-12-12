@@ -32,10 +32,16 @@
         <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-diagnostics/pom.xml" />
         <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-clinical/pom.xml" />
         <option value="$PROJECT_DIR$/openhis-core/openhis-domain/openhis-administration/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-persistence/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-domain/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-application/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-common/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/openhis-core/pom.xml" />
+        <option value="$PROJECT_DIR$/openhis-domain/pom.xml" />
         <option value="$PROJECT_DIR$/openhis-server/openhis-H22010202493/pom.xml" />
         <option value="$PROJECT_DIR$/openhis-server/openhis-domain/rules/pom.xml" />
       </set>

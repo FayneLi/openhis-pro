@@ -3,7 +3,6 @@ package com.whale.framework.aspectj;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whale.common.core.domain.R;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import com.whale.common.annotation.Dict;
 import org.springframework.beans.factory.annotation.Autowired;

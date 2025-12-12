@@ -41,8 +41,8 @@ public class OperLogAspect {
     /**
      * 定义切点：所有Controller包下的方法，排除login接口
      */
-    @Pointcut("execution(* com.openhis.web..controller..*.*(..)) "
-        + "&& !execution(* com.openhis.web..controller..*.login(..)) ")
+    @Pointcut("execution(* org.openhis.web..controller..*.*(..)) "
+        + "&& !execution(* org.openhis.web..controller..*.login(..)) ")
     public void operLogPointCut() {}
 
     /**
