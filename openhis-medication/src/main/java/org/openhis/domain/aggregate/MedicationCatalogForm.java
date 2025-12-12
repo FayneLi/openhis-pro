@@ -1,4 +1,4 @@
-package com.openhis.web.datadictionary.dto;
+package org.openhis.domain.aggregate;
 
 import java.math.BigDecimal;
 import java.util.Date;
