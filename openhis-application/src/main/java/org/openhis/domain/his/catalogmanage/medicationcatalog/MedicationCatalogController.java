@@ -12,10 +12,7 @@ import com.whale.common.utils.bean.BeanUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import org.openhis.common.enums.PublicationStatus;
 import org.openhis.common.enums.Whether;
-import org.openhis.domain.entity.ChargeItemDefinition;
-import org.openhis.domain.entity.ItemUpFromDirectoryDto;
-import org.openhis.domain.entity.MedicationDefinition;
-import org.openhis.domain.entity.MedicationManageUpDto;
+import org.openhis.domain.entity.*;
 import org.openhis.domain.his.catalogmanage.medicationcatalog.dto.*;
 import org.openhis.domain.repository.IMedicationDefinitionRepository;
 import org.openhis.domain.service.ChargeItemDefintionManager;
@@ -87,7 +84,7 @@ public class MedicationCatalogController {
         MedicationDefinition medication = new MedicationDefinition();
         ChargeItemDefinition chargeItemDefinition = new ChargeItemDefinition();
 
-
+        //药品目录
         MedicationManageUpDto upDto = new MedicationManageUpDto();
         BeanUtils.copyProperties(medicationDetailDto, upDto);
         R<MedicationDefinition> medicationDefinitionR = medicationManager.create(upDto);
@@ -95,7 +92,7 @@ public class MedicationCatalogController {
             medication = medicationDefinitionR.getData();
         }
 
-
+        //价格
         ItemUpFromDirectoryDto itemUpFromDirectoryDto = new ItemUpFromDirectoryDto();
         BeanUtils.copyProperties(medicationDetailDto, itemUpFromDirectoryDto);
         itemUpFromDirectoryDto.setInstanceId(medication.getMedicationDefId())
@@ -109,6 +106,13 @@ public class MedicationCatalogController {
             chargeItemDefinition = chargeItemDefinitionR.getData();
         }
 
+
+        //价格明细
+        itemUpFromDirectoryDto.setDefinitionId(chargeItemDefinition.getId());
+        R<List<ChargeItemDefDetail>> listR = chargeItemDefintionManager.addItemDetail(itemUpFromDirectoryDto);
+        if (listR.getCode() == 200) {
+
+        }
 
 
         return R.ok();
