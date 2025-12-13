@@ -92,6 +92,7 @@ mybatis-plus:
 
 # springdoc配置
 springdoc:
+#  packages-to-scan: org.openhis
   swagger-ui:
     # 修改Swagger UI路径
     path: /swagger-ui.html
@@ -105,10 +106,10 @@ springdoc:
   group-configs:
     - group: 'whale'
       paths-to-match: '/whale/**'
-      packages-to-scan: com.whale.admin.web.controller
+      packages-to-scan: com.whale
     - group: 'openhis'
-      paths-to-match: '/openhis/**'
-      packages-to-scan: org.openhis.**.controller
+      paths-to-match: '/api/**'
+      packages-to-scan: org.openhis
   default-flat-param-object: false
 
 
